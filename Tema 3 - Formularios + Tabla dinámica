@@ -1,0 +1,42 @@
+function guardarPersona(){
+    // Obtener el formulario
+    let formularioHtml1 = document.forms['Formularios'];
+
+    // 1) OBTENER NOMBRE, APELLIDO Y EDAD DESDE LOS INPUTS
+    let nombre = formularioHtml1['idNombre'].value;
+    let apellido = formularioHtml1['idApellido'].value;
+    let edad = formularioHtml1['idEdad'].value;
+
+    // 3) VALIDAR CAMPOS VACÍOS ANTES DE AGREGAR
+    if (nombre === "" || apellido === "" || edad === "") {
+        document.getElementById("respuesta").innerHTML =
+            "<p style='color:red'>Por favor llena todos los campos.</p>";
+        return; // si falta algo, no seguimos
+    }
+
+    // 1) MOSTRAR NOMBRE Y APELLIDO EN EL DIV RESPUESTA
+    document.getElementById("respuesta").innerHTML =
+        `<h1>El estudiante es: ${nombre} ${apellido} ${edad}</h1>`;
+    console.log(`El estudiante es ${nombre} ${apellido} ${edad}`);
+
+    // 2) INSERTAR UNA FILA A LA TABLA CON LOS VALORES INGRESADOS
+    mostrarPersona(nombre, apellido, edad);
+
+    // 4) LIMPIAR LOS INPUTS TRAS GUARDAR
+    formularioHtml1.reset();
+}
+
+function mostrarPersona(nombre, apellido, edad){
+    // Obtener el tbody de la tabla
+    let bodyElement = document.getElementById("detalle");
+    console.log(bodyElement);
+
+    // 2) AQUI SE INSERTA LA FILA EN LA TABLA
+    bodyElement.innerHTML += `
+        <tr>
+            <td>${nombre}</td>
+            <td>${apellido}</td>
+            <td>${edad}</td>
+        </tr>
+    `;
+}
